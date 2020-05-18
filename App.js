@@ -2,12 +2,17 @@ import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import UserHeader from "./Components/Header";
 import Login from "./Components/Login";
+import { Provider } from "react-redux";
+import store from "./redux/store/index";
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <UserHeader />
-      <Login />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <UserHeader />
+        <Login />
+      </View>
+    </Provider>
   );
 }
 const styles = StyleSheet.create({

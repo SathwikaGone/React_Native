@@ -1,11 +1,19 @@
 import React from "react";
-import { View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, Text } from "react-native";
+import { connect } from "react-redux";
+import * as actions from "../redux/actions";
 
-export default function Buttons() {
+function Buttons(props) {
+  onSubmitHandler = () => {
+    let data = {
+      email: props.email,
+      password: props.password,
+    };
+    this.props.dispatch(actions.loginUser(data));
+  };
   return (
     <View style={styles.buttons}>
-      <Button title="cancle" />
-
+      <Button title="cancle" onPress={this.onSubmitHandler} />
       <Button title="submit" />
     </View>
   );
@@ -20,3 +28,5 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+export default connect()(Buttons);

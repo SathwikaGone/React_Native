@@ -9,7 +9,7 @@ import {
   takeLatest,
 } from "redux-saga/effects";
 import * as Types from "../actions/types";
-import { GetDataFromServer, deleteService } from "../service";
+import { GetDataFromServer, deleteService } from "../services/index";
 
 const baseUrl = "";
 function* fetchLoginUser(action) {

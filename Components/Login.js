@@ -11,6 +11,7 @@ export default function Login() {
   onChangePasswordHandler = (value) => {
     setPassword(value);
   };
+
   return (
     <View style={styles.login}>
       <Text style={styles.title}>LOGIN</Text>
@@ -28,7 +29,7 @@ export default function Login() {
           onChangeText={this.onChangePasswordHandler}
         />
       </View>
-      <Buttons />
+      <Buttons email={email} password={password} />
     </View>
   );
 }

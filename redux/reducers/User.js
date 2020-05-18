@@ -27,7 +27,9 @@ const initialState = {
   message: "",
 };
 
-export const UserReducer = (state = initialState, action) => {
+export default UserReducer = (state = initialState, action) => {
+  console.log(state);
+
   switch (action.type) {
     case Types.LOGIN_USER:
       return Object.assign({}, state, {
