@@ -28,8 +28,6 @@ const initialState = {
 };
 
 export default UserReducer = (state = initialState, action) => {
-  console.log(state);
-
   switch (action.type) {
     case Types.LOGIN_USER:
       return Object.assign({}, state, {
@@ -37,15 +35,20 @@ export default UserReducer = (state = initialState, action) => {
         isValidToken: false,
         pending: true,
       });
+      break;
     case Types.LOGIN_USER_SERVER_RESPONSE_ERROR:
       return handleLoginServerResponseError(state);
+      break;
     case Types.LOGIN_USER_SERVER_RESPONSE_SUCCESS:
       return handleLoginServerResponseSuccess(state, action);
+      break;
+    default:
+      return state;
   }
 };
 
 const handleLoginServerResponseSuccess = (state, action) => {
-  console.log("Redux" + JSON.stringify(state));
+  // console.log("Redux" + JSON.stringify(state));
   let newState = { ...state };
   if (action.result !== undefined) {
     newState = Object.assign({}, state, {

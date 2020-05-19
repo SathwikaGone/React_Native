@@ -9,22 +9,27 @@ import {
   takeLatest,
 } from "redux-saga/effects";
 import * as Types from "../actions/types";
-import { GetDataFromServer, deleteService } from "../services/index";
+import {
+  GetDataFromServer,
+  PostDataToServer,
+  deleteService,
+} from "../services/index";
 
-const baseUrl = "";
+const baseUrl = "http://localhost:5000";
+
 function* fetchLoginUser(action) {
   try {
-    console.log("saga");
-    console.log("Action->" + JSON.stringify(action));
+    // console.log("saga");
+    // console.log("Action->" + JSON.stringify(action));
     let formBody = {};
     formBody.email = action.email;
     formBody.password = action.password;
     const loginUrl = baseUrl + "/login";
-    const response = yield call(GetDataFromServer, loginUrl, "POST", formBody);
+    const response = yield call(PostDataToServer, loginUrl, "POST", formBody);
     const result = yield response.json();
-    console.log("ADS" + result.workingdetails);
-    console.log("Result ->" + JSON.stringify(result));
-    console.log("Result Json" + result);
+    // console.log("ADS" + result.workingdetails);
+    // console.log("Result ->" + JSON.stringify(result));
+    // console.log("Result Json" + result);
     if (result.error) {
       yield put({
         type: Types.LOGIN_USER_SERVICE_RESPONSE_FAILURE,

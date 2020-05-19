@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
-import Buttons from "./Buttons";
+import { connect, useSelector, useDispatch } from "react-redux";
+import * as actions from "../redux/actions";
 
-export default function Login() {
+function Login() {
+  const state = useSelector((state) => state.UserReducer);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   onChangeEmailHandler = (value) => {
     setEmail(value);
   };
   onChangePasswordHandler = (value) => {
     setPassword(value);
+  };
+
+  onSubmitHandler = () => {
+    console.log("in on submit");
+    let data = {
+      email: email,
+      password: password,
+    };
+    dispatch(actions.loginUser(data));
   };
 
   return (
@@ -29,7 +42,11 @@ export default function Login() {
           onChangeText={this.onChangePasswordHandler}
         />
       </View>
-      <Buttons email={email} password={password} />
+      <View style={styles.buttons}>
+        <Button title="cancle" />
+        <Button title="submit" onPress={this.onSubmitHandler} />
+      </View>
+      <Text>{state.loggedIn}</Text>
     </View>
   );
 }
@@ -61,4 +78,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 1,
   },
+  buttons: {
+    padding: 20,
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexDirection: "row",
+    width: "100%",
+  },
 });
+
+export default connect()(Login);
