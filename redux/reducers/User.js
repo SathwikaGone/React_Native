@@ -48,7 +48,7 @@ export default UserReducer = (state = initialState, action) => {
 };
 
 const handleLoginServerResponseSuccess = (state, action) => {
-  // console.log("Redux" + JSON.stringify(state));
+  console.log("Redux" + JSON.stringify(state));
   let newState = { ...state };
   if (action.result !== undefined) {
     newState = Object.assign({}, state, {

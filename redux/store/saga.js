@@ -15,25 +15,28 @@ import {
   deleteService,
 } from "../services/index";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://timesheetnodeservices.herokuapp.com";
 
 function* fetchLoginUser(action) {
   try {
     // console.log("saga");
     // console.log("Action->" + JSON.stringify(action));
     let formBody = {};
-    formBody.email = action.email;
-    formBody.password = action.password;
+    formBody.email = action.payload.email;
+    formBody.password = action.payload.password;
     const loginUrl = baseUrl + "/login";
+    console.log("result", loginUrl);
+
     const response = yield call(PostDataToServer, loginUrl, "POST", formBody);
+    console.log("result", response);
     const result = yield response.json();
-    // console.log("ADS" + result.workingdetails);
-    // console.log("Result ->" + JSON.stringify(result));
-    // console.log("Result Json" + result);
-    if (result.error) {
+    console.log("ADS" + result.workingdetails);
+    console.log("Result ->" + JSON.stringify(result));
+    console.log("Result Json" + result);
+    if (result.errors) {
       yield put({
         type: Types.LOGIN_USER_SERVICE_RESPONSE_FAILURE,
-        error: result.error,
+        error: result.errors,
       });
     } else {
       yield put({ type: Types.LOGIN_USER_SERVICE_RESPONSE_SUCCESS, result });
